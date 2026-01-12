@@ -7,14 +7,14 @@ A multi-database data platform for AI-driven marketing personalization.
 ### Option A: Run everything with Docker (recommended)
 
 ```bash
-cd founding-data-engineer-assignment
+cd marketing
 docker compose up -d --build
 ```
 
 ### Option B: Run pipeline/API locally (dev)
 
 ```bash
-cd founding-data-engineer-assignment
+cd marketing
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
@@ -31,7 +31,7 @@ docker compose up -d
 ### 1) Start services
 
 ```bash
-cd founding-data-engineer-assignment
+cd marketing
 docker compose up -d --build
 ```
 
@@ -42,17 +42,14 @@ docker compose up -d --build
 1. Open Airflow UI: `http://localhost:8080`
 2. Login:
    - Username: `admin`
-   - Password: printed in the Airflow container logs on first startup:
-
-```bash
-docker compose logs --tail 200 airflow
-```
+   - Password: `admin`
 
 3. Trigger the DAG: `marketing_personalization_pipeline`
 
 #### Run locally (without Airflow)
 
 ```bash
+# First install dependencies (see Option B above)
 python -m src.pipeline.main --input data/sample-conversations.json
 ```
 
@@ -74,8 +71,40 @@ curl "http://localhost:8000/recommendations/u1?top_k=5"
 
 ## Outputs
 
-- **Analytics report**: `data/reports/analytics_report.json`
+- **Analytics report**: Generated after pipeline run (check Airflow logs for location)
+- **API response**: Recommendations available at `/recommendations/{user_id}` endpoint
 - **(Optional) lineage / monitoring**: `data/reports/` (if enabled by the pipeline)
+
+## Troubleshooting
+
+### Common Issues
+
+1. **Docker permission error with Airflow entrypoint**
+   ```bash
+   chmod +x src/dags/airflow-entrypoint.sh
+   docker compose restart airflow
+   ```
+
+2. **Local pipeline fails with ModuleNotFoundError**
+   - Ensure you've installed dependencies: `pip install -r requirements.txt`
+   - Python version must be 3.10+ (some packages require 3.11+ for Airflow)
+
+3. **Services not accessible**
+   - Check all containers are running: `docker ps`
+   - Verify ports aren't already in use
+   - Restart services: `docker compose restart`
+
+4. **Airflow DAG not visible**
+   - Check DAG file location: `src/dags/marketing_personalization_pipeline_dag.py`
+   - Verify Airflow can access the mounted volume
+   - Check Airflow logs: `docker compose logs airflow`
+
+### Verification Steps
+
+1. **Check all services**: `docker ps`
+2. **Test API**: `curl "http://localhost:8000/recommendations/u1?top_k=5"`
+3. **Access Airflow**: Open `http://localhost:8080` (admin/admin)
+4. **Check DAG status**: In Airflow UI, ensure `marketing_personalization_pipeline` is unpaused
 
 ## Design choices (what & why)
 
