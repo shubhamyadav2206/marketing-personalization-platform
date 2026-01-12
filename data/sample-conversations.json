@@ -1,0 +1,50 @@
+[
+  {
+    "userid": "u1",
+    "message": "Love this skincare product!",
+    "timestamp": "2026-01-10T10:00:00Z",
+    "campaign": "c1"
+  },
+  {
+    "userid": "u2",
+    "message": "Great moisturizer recommendation.",
+    "timestamp": "2026-01-10T10:01:00Z",
+    "campaign": "c1"
+  },
+  {
+    "userid": "u3",
+    "message": "Not interested in serums.",
+    "timestamp": "2026-01-10T10:02:00Z",
+    "campaign": "c2"
+  },
+  {
+    "userid": "u1",
+    "message": "The vitamin C serum made my skin glow!",
+    "timestamp": "2026-01-10T10:10:00Z",
+    "campaign": "c1"
+  },
+  {
+    "userid": "u2",
+    "message": "Looking for a good night cream.",
+    "timestamp": "2026-01-10T10:15:00Z",
+    "campaign": "c3"
+  },
+  {
+    "userid": "u4",
+    "message": "The retinol cream is too strong for my skin.",
+    "timestamp": "2026-01-10T10:20:00Z",
+    "campaign": "c4"
+  },
+  {
+    "userid": "u3",
+    "message": "I prefer organic ingredients in my skincare.",
+    "timestamp": "2026-01-10T10:25:00Z",
+    "campaign": "c2"
+  },
+  {
+    "userid": "u5",
+    "message": "The sunscreen is perfect for my sensitive skin.",
+    "timestamp": "2026-01-10T10:30:00Z",
+    "campaign": "c5"
+  }
+]
